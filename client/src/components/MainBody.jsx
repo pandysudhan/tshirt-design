@@ -1,7 +1,8 @@
 import TShirtDesigner from "./FabricCanvas"
+import TShirt from "./testKonva"
 function MainBody() {
     return (
-        <><TShirtDesigner></TShirtDesigner></>
+        <TShirt></TShirt>
     )
 }
 

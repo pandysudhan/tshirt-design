@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { fabric } from "fabric";
 
 const TShirtDesigner = () => {
+
   const canvasRefFront = useRef(null);
 
   // Tshirt color area
@@ -9,6 +10,7 @@ const TShirtDesigner = () => {
 
   useEffect(() => {
     console.log('rendered')
+
     const canvasFront = new fabric.Canvas(canvasRefFront.current, {
       width: 437,
       height: 622,
@@ -180,22 +182,27 @@ const TShirtDesigner = () => {
   const handleCanvasClick = () => {
     // Handle canvas click event if needed
   };
-
   return (
-    <div>
-      <label>
-        T-Shirt Color:
-        <input
-          type="color"
-          value={mainAreaColor}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setMainAreaColor(e.target.value);
-          }}
-        />
-      </label>
-      <div>
-        <canvas onClick={() => {console.log(mainAreaColor)}} ref={canvasRefFront} />
+    <div className="max-w-md mx-auto bg-white rounded overflow-hidden shadow-lg p-4">
+      <div className="flex">
+        <div className="flex-shrink-0">
+          <canvas
+            onClick={handleCanvasClick}
+            ref={canvasRefFront}
+            className="w-32 h-48 border border-gray-300"
+          />
+        </div>
+        <div className="ml-4">
+          <label className="block text-sm font-medium text-gray-700">
+            T-Shirt Color:
+          </label>
+          <input
+            type="color"
+            value={mainAreaColor}
+            onChange={(e) => setMainAreaColor(e.target.value)}
+            className="mt-1 block w-12 h-12 rounded-md border border-gray-300"
+          />
+        </div>
       </div>
     </div>
   );
