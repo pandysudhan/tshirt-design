@@ -2,6 +2,7 @@ This is a tshirt designing web app in making with React frontend and Flask backe
 
 For canvas, using, Konva.js
 
+Try the app: http://pandysudhan.com.np/tshirt-design/
 
 
 
