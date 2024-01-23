@@ -1,12 +1,12 @@
-import CanvasViewPicker from "./designComponents/canvasViewSelector";
-import KanvasArea from "./designComponents/kanvasArea";
-import ColorPickerArea from "./designComponents/colorPickerArea";
-import tshirtData from "../assets/productData/individual/tshirt";
+
+import CanvasViewPicker from "../components/designComponents/canvasViewSelector";
+import KanvasArea from "../components/designComponents/kanvasArea";
+import ColorPickerArea from "../components/designComponents/colorPickerArea";
 import { useState } from "react";
 
-function MainBody() {
-  const [productData, setProductData] = useState(tshirtData);
-  const [currView, setCurrView] = useState(tshirtData.views[0].view_name);
+function DesignProductPage({productData}) {
+  const [productData, setProductData] = useState(productData);
+  const [currView, setCurrView] = useState(productData.views[0].view_name);
 
   function handleViewChange(new_view_name) {
     setCurrView(new_view_name);
@@ -19,7 +19,7 @@ function MainBody() {
   return (
     <div className="flex flex-col justify-center items-center">
       <CanvasViewPicker
-        all_views={tshirtData.views}
+        all_views={productData.views}
         onViewChange={handleViewChange}
       ></CanvasViewPicker>
       <div className="flex flex-row">
