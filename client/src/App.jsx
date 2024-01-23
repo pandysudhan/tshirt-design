@@ -1,13 +1,18 @@
 import NavBar from "./components/NavBar";
-import MainBody from "./components/MainBody";
 import BrowseDesignPage from "./pages/browse_design_page";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import DesignProductPage from "./pages/design_product";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <NavBar></NavBar>
-      <BrowseDesignPage></BrowseDesignPage>
-    </>
+      <Routes>
+        <Route path="/" element={<BrowseDesignPage />} />
+        <Route path="/design" element={<DesignProductPage />} />
+      </Routes>{" "}
+    </BrowserRouter>
   );
 }
 

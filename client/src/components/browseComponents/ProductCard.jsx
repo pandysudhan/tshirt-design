@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 export default function ProductCard({ product }) {
-  const handleProductClick = (product_name) => {
-    console.log(product_name + " clicked");
+  const navigate = useNavigate();
+  const handleProductClick = () => {
+    console.log(product)
+    navigate('/design',{state: {data:product}})
   };
   return (
     <div
