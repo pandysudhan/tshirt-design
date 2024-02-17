@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
         handleProductClick(product.product_name);
       }}
     >
-      <img src={product.thumbnail} width="100" height="100"></img>
+      <img src={product.thumbnail} width="150"></img>
       <h1 className="text-2xl font-bold text-black-500 text-center">
         {" "}
         {product.product_name}

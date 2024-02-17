@@ -40,7 +40,7 @@ export default function KanvasArea({ data, currView }) {
 
   return (
     <div>
-      <div id="stage-container"></div>
+      <div id="stage-container" ></div>
     </div>
   );
 }
