@@ -38,6 +38,9 @@ function DesignProductPage() {
       // Update the productData with the unique ID and name
       const updatedProductData = { ...productData, id: uniqueId, product_name: name };
 
+      console.log(updatedProductData)
+
+      
       // Call your API to save the design with updatedProductData
       const response = await fetch("http://127.0.0.1:8000/save_design", {
         method: "POST",

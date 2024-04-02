@@ -9,7 +9,7 @@ const tshirtData = {
     {
       id: "front_main_color",
       display_name: "Front Main Body Color",
-      color_value: "#3498db",
+      color_value: "#000000",
     },
     {
       id: "sleeves_color",
