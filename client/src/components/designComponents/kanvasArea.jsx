@@ -29,6 +29,7 @@ export default function KanvasArea({ data, onDataChange, currView }) {
     console.log("changed position of img " + imgIdx, position);
     console.log(updatedData);
   }
+
   const drawImageOnCanvas = (idx, img) => {
     const layer = layerRef.current;
   
@@ -42,6 +43,7 @@ export default function KanvasArea({ data, onDataChange, currView }) {
       x: img.position.x,
       y: img.position.y,
       draggable: true,
+
     });
   
     konvaImage.on("dragstart", function () {
@@ -59,6 +61,7 @@ export default function KanvasArea({ data, onDataChange, currView }) {
     const transformer = new Konva.Transformer({
       nodes: [konvaImage],
       keepRatio: true, // Maintain aspect ratio while resizing
+      padding: 10, // Add padding to handle transparent boundaries
       boundBoxFunc: function (oldBox, newBox) {
         // Limit resizing to canvas boundaries
         if (newBox.width < 10 || newBox.height < 10) {
@@ -85,13 +88,14 @@ export default function KanvasArea({ data, onDataChange, currView }) {
     layer.draw();
   };
   
-  
 
   useEffect(() => {
     const stage = new Konva.Stage({
       container: "stage-container",
       width: 437,
       height: 622,
+      fill: 'transparent',
+
     });
     stageRef.current = stage;
 
