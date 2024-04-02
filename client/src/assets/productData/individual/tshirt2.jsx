@@ -1,6 +1,6 @@
 const tshirtData = {
   product_type: "tshirt",
-  product_name: "T-shirt1",
+  product_name: "T-shirt2",
   thumbnail: "/productThumbnails/tshirt.png",
   num_of_parts: 4,
   num_of_views: 1,

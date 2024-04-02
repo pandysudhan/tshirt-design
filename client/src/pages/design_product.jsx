@@ -31,16 +31,18 @@ function DesignProductPage() {
       > {"<= Back"}</Button>
       <div className="flex flex-col justify-center items-center">
         <CanvasViewPicker
+        currView  = {currView}
           all_views={productData.views}
           onViewChange={handleViewChange}
         ></CanvasViewPicker>
         <div className="flex flex-row">
           {" "}
-          <KanvasArea data={productData} currView={currView}></KanvasArea>
+          <KanvasArea data={productData} onDataChange={handleProductDataChange} currView={currView}></KanvasArea>
           <div className="flex flex-col justify-center">
             <ColorPickerArea
               data={productData}
               onDataChange={handleProductDataChange}
+              currView = {currView}
             ></ColorPickerArea>
           </div>
         </div>

@@ -1,15 +1,30 @@
 import { Button } from "flowbite-react";
 
-function CanvasViewPicker({ all_views, onViewChange }) {
+function CanvasViewPicker({ currView, all_views, onViewChange }) {
+  let btnColor = "red";
+
   return (
-    <div className="flex flex-row mt-10 justify-center" >
-      {all_views.map((item) => (
-        <Button key={item.view_name}  className="mx-5"
-          onClick={() => {
-            onViewChange(item.view_name);
-          }}
-        >{item.view_name}</Button>
-      ))}
+    <div className="flex flex-row mt-10 justify-center">
+      {all_views.map((item) => {
+        if (item.view_name === currView) {
+          btnColor = "success";
+        } else {
+          btnColor = "red";
+        }
+
+        return (
+          <Button
+            key={item.view_name}
+            color={btnColor}
+          
+            onClick={() => {
+              onViewChange(item.view_name);
+            }}
+          >
+            {item.view_name}
+          </Button>
+        );
+      })}
     </div>
   );
 }
