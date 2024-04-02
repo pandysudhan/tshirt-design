@@ -1,4 +1,5 @@
 const tshirtData = {
+  id:2,
   product_type: "tshirt",
   product_name: "T-shirt2",
   thumbnail: "/productThumbnails/tshirt.png",

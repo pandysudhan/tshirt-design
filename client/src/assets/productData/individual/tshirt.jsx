@@ -1,4 +1,5 @@
 const tshirtData = {
+  id: 1,
   product_type: "tshirt",
   product_name: "T-shirt1",
   thumbnail: "/productThumbnails/tshirt.png",
@@ -70,6 +71,7 @@ const tshirtData = {
       images: [],
     },
 
+    
     {
       view_name: "Back View",
       parts: [

@@ -6,11 +6,10 @@ export default function CategoryArea({ products }) {
     
         {products.map((product) => (
           <ProductCard
-            key={product.product_name}
+            key={product.id}
             product={product}
           ></ProductCard>
         ))}
-
     </div>
   );
 }

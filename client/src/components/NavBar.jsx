@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Navbar,
@@ -6,9 +7,36 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Component() {
+  const navigate = useNavigate();
+
+  // State to track whether access token is set or not
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect to check if access token is present in local storage on component mount
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken !== null && accessToken !== undefined && accessToken !== "") {
+      setIsLoggedIn(true);
+    }
+  }, );
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear access token from local storage or wherever it is stored
+    localStorage.removeItem("access_token");
+    // Set isLoggedIn to false
+    setIsLoggedIn(false);
+  };
+
+  // Function to handle login
+  const handleLogin = () => {
+    // Perform login actions (e.g., redirect to login page)
+    navigate("/login");
+  };
+
   return (
     <Navbar fluid rounded>
       <NavbarBrand href="https://flowbite-react.com">
@@ -18,16 +46,16 @@ function Component() {
           alt="Flowbite React Logo"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-Tshirt Design        </span>
+          Tshirt Design
+        </span>
       </NavbarBrand>
       <div className="flex md:order-2">
-        <Button
-          onClick={() => {
-            handleClick("get started");
-          }}
-        >
-          Get started
-        </Button>
+        {/* Conditionally render either logout or login button */}
+        {isLoggedIn ? (
+          <Button onClick={handleLogout}>Logout</Button>
+        ) : (
+          <Button onClick={handleLogin}>Login</Button>
+        )}
         <NavbarToggle />
       </div>
       <NavbarCollapse>
@@ -37,7 +65,6 @@ Tshirt Design        </span>
         <NavbarLink href="#">About</NavbarLink>
         <NavbarLink href="#">Services</NavbarLink>
         <NavbarLink href="#">Pricing</NavbarLink>
-        <NavbarLink href="#">Contact</NavbarLink>
       </NavbarCollapse>
     </Navbar>
   );

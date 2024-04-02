@@ -1,5 +1,8 @@
 export default function colorPickerArea({ data, onDataChange, currView }) {
 
+  console.log(data)
+
+
   function onColorChange(id, new_color) {
     const updatedColors = data.colors.map((color) => {
       if (color.id === id) {
