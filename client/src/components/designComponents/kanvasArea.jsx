@@ -36,8 +36,15 @@ export default function KanvasArea({ data, onDataChange, currView }) {
     const width = img.size ? img.size.width : 80;
     const height = img.size ? img.size.height : 80;
   
+    console.log("this is image data"+img.img_data);
+
+    const imageObj = new window.Image();
+  
+    // Set the src attribute to the Base64 string
+    imageObj.src = img.img_data;
+
     const konvaImage = new Konva.Image({
-      image: img.img_data,
+      image: imageObj,
       width: width,
       height: height,
       x: img.position.x,

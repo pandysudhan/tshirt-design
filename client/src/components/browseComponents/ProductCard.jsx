@@ -21,10 +21,13 @@ export default function ProductCard({ data }) {
     const width = img.size ? img.size.width * widthScale : 80 * widthScale;
     const height = img.size ? img.size.height * heightScale : 80 * heightScale;
 
-    console.log(img.img_data)
+    const imageObj = new window.Image();
+  
+    // Set the src attribute to the Base64 string
+    imageObj.src = img.img_data;
 
     const konvaImage = new Konva.Image({
-      image: img.img_data,
+      image: imageObj,
       width: width,
       height: height,
       x: img.position.x * widthScale,

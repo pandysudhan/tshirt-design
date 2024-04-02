@@ -43,11 +43,11 @@ export default function colorPickerArea({ data, onDataChange, currView }) {
     const reader = new FileReader();
 
     reader.onload = () => {
-      const img = new window.Image();
-      img.src = reader.result;
-      img.onload = () => {
-        updateImagesForView(img);
-      };
+      
+      const img = reader.result;
+      
+      updateImagesForView(img);
+      
     };
 
     reader.readAsDataURL(file);
@@ -85,7 +85,7 @@ export default function colorPickerArea({ data, onDataChange, currView }) {
         {data.views.map((view, viewIndex) => (
           view.view_name === currView && view.images.map((image, imgIndex) => (
             <div key={`image_${viewIndex}_${imgIndex}`} className="flex flex-row my-3">
-              <img src={image.img_data.src} alt={`Uploaded ${imgIndex + 1}`} style={{ maxWidth: '100px', maxHeight: '100px', marginRight: '10px' }} />
+              <img src={image.img_data} alt={`Uploaded ${imgIndex + 1}`} style={{ maxWidth: '100px', maxHeight: '100px', marginRight: '10px' }} />
               <button onClick={() => removeImageFromView(imgIndex)}>Remove</button>
             </div>
           ))
