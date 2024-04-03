@@ -1,11 +1,12 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Konva from "konva";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductCard({ data }) {
   const navigate = useNavigate();
 
-  console.log(data);
   const currView = "Front View";
   const layerRef = useRef(null);
   const stageRef = useRef(null);
@@ -22,7 +23,7 @@ export default function ProductCard({ data }) {
     const height = img.size ? img.size.height * heightScale : 80 * heightScale;
 
     const imageObj = new window.Image();
-  
+
     // Set the src attribute to the Base64 string
     imageObj.src = img.img_data;
 
@@ -112,9 +113,56 @@ export default function ProductCard({ data }) {
     navigate("/design", { state: { data: data } });
   };
 
+  const handleDeleteProduct = async () => {
+    try {
+      const accessToken = localStorage.getItem("access_token");
+      if (!accessToken) {
+        // Access token not found, redirect to login page
+        navigate("/login");
+        return;
+      }
+
+      // Access token found, make delete request using Fetch
+      const response = await fetch(`YOUR_API_ENDPOINT/${data.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      // Check if request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Handle success response
+      const data = await response.json();
+       // Log success message or do something else
+    } catch (error) {
+      // Handle error
+      console.error("Error deleting product:", error);
+    }
+  };
+
   return (
-    <div onClick={handleProductClick}>
-      <div id={`stage-container-${data.id}`}></div>
+    <div className="flex flex-col align-center">
+      <div onClick={handleProductClick} style={{ position: "relative" }}>
+        <div id={`stage-container-${data.id}`} />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            background: "rgba(255, 255, 255, 0.7)",
+            padding: "5px",
+          }}
+        >
+          {data.product_name}
+        </div>
+        <div style={{ position: "absolute", top: "5px", right: "5px" }}></div>
+      </div>
     </div>
   );
 }

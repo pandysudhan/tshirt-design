@@ -41,12 +41,12 @@ function BrowseDesignPage() {
     <div className="flex flex-col">
       <div className="my-5">
         <h1 className="text-4xl font-bold text-blue-500 my-5">Choose a Design</h1>
-        <CategoryArea products={allProducts[0]}></CategoryArea>
+        <CategoryArea products={allProducts[0]} ></CategoryArea>
       </div>
       {myDesigns.length > 0 && (
         <div className="my-5">
           <h1 className="text-4xl font-bold text-blue-500 my-5">My Custom Edits</h1>
-          <CategoryArea products={myDesigns}></CategoryArea>
+          <CategoryArea products={myDesigns} ></CategoryArea>
         </div>
       )}
     </div>

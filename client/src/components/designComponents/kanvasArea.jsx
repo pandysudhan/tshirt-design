@@ -9,6 +9,9 @@ export default function KanvasArea({ data, onDataChange, currView }) {
   const currViewData = data.views.find((view) => view.view_name === currView);
   const currViewImages = currViewData.images || [];
 
+
+
+
   function onImagePositionChange(imgIdx, position, size) {
  
     const updatedImages = currViewImages.map((image, index) => {
@@ -97,6 +100,8 @@ export default function KanvasArea({ data, onDataChange, currView }) {
   
 
   useEffect(() => {
+
+
     const stage = new Konva.Stage({
       container: "stage-container",
       width: 437,

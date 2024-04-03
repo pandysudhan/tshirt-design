@@ -4,7 +4,7 @@ function CanvasViewPicker({ currView, all_views, onViewChange }) {
   let btnColor = "red";
 
   return (
-    <div className="flex flex-row mt-10 justify-center">
+    <div className="flex flex-row mt-2 justify-center">
       {all_views.map((item) => {
         if (item.view_name === currView) {
           btnColor = "success";
