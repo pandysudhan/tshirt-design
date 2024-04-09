@@ -9,7 +9,8 @@ from flask_jwt_extended import (
 from dotenv import load_dotenv
 import time
 from .Users import User
-from .db import db
+from .mongodb import db 
+from .mysqldb import db as mysql_db
 
 
 @app.route("/")
@@ -92,6 +93,7 @@ def save_design():
         print("Error saving design:", e)
         return jsonify({"message": "Error saving design"}), 500
 
+
 @app.route("/my_designs", methods=["GET"])
 @jwt_required()  # Requires authentication
 def my_designs():
@@ -136,3 +138,12 @@ def delete_design(design_id):
     except Exception as e:
         print("Error deleting design:", e)
         return jsonify({"message": "Error deleting design"}), 500
+    
+
+
+
+
+@app.route('/mysql_initiate')
+def create_tables():
+    mysql_db.create_all()
+    return 'Tables created'

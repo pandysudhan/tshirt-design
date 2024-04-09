@@ -59,7 +59,7 @@ function Component() {
         <NavbarToggle />
       </div>
       <NavbarCollapse>
-        <NavbarLink href="#" active>
+        <NavbarLink href="/" active>
           Home
         </NavbarLink>
         <NavbarLink href="#">About</NavbarLink>

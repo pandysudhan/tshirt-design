@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Konva from "konva";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductCard({ data }) {
   const navigate = useNavigate();
@@ -157,6 +155,7 @@ export default function ProductCard({ data }) {
             textAlign: "center",
             background: "rgba(255, 255, 255, 0.7)",
             padding: "5px",
+            fontWeight: "bold",
           }}
         >
           {data.product_name}

@@ -2,7 +2,7 @@ import CanvasViewPicker from "../components/designComponents/canvasViewSelector"
 import KanvasArea from "../components/designComponents/kanvasArea";
 import ColorPickerArea from "../components/designComponents/colorPickerArea";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { Button } from "flowbite-react";
 import { v4 as uuidv4 } from "uuid"; // Import UUID library
 
@@ -13,6 +13,7 @@ function DesignProductPage() {
   const [productData, setProductData] = useState(data);
   const [currView, setCurrView] = useState(productData.views[0].view_name);
   const [name, setName] = useState(productData.product_name);
+
 
   function handleViewChange(new_view_name) {
     setCurrView(new_view_name);
@@ -35,7 +36,7 @@ function DesignProductPage() {
       var uniqueId = productData.id;
       // Generate a unique ID
       if (productData.isPreset) {
-        uniqueId =  uuidv4();
+        uniqueId = uuidv4();
       }
 
       // Update the productData with the unique ID and name
@@ -58,6 +59,9 @@ function DesignProductPage() {
         body: JSON.stringify(updatedProductData),
       });
 
+      setProductData(updatedProductData);
+
+
       // Handle response if needed
       if (response.ok) {
         console.log(await response.json());
@@ -72,7 +76,12 @@ function DesignProductPage() {
       console.error("Error saving design:", error);
       // Handle error if needed
     }
-    navigate("/");
+
+  };
+
+  const handleSaveAndNavigate = () => {
+    handleSaveDesign();
+    navigate("/"); // Navigate to home page after saving design
   };
 
   // Function to handle name change
@@ -119,6 +128,11 @@ function DesignProductPage() {
     navigate("/");
   };
 
+  const handleOrderDesign = () => {
+    handleSaveDesign();
+    navigate("/checkout", { state: { data: productData } });
+  };
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col justify-center items-center">
@@ -152,7 +166,7 @@ function DesignProductPage() {
           </div>
         </div>
         <div className="flex flex-row">
-          <Button className="w-40 mx-10" onClick={handleSaveDesign}>
+          <Button className="w-40 mx-10" onClick={handleSaveAndNavigate}>
             Save Design
           </Button>
 
@@ -164,6 +178,10 @@ function DesignProductPage() {
               Delete Design
             </Button>
           )}
+
+          <Button className="w-40 mx-10" onClick={handleOrderDesign}>
+            Order Design
+          </Button>
         </div>
       </div>
     </div>
