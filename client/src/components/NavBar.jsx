@@ -18,17 +18,26 @@ function Component() {
   // useEffect to check if access token is present in local storage on component mount
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
-    if (accessToken !== null && accessToken !== undefined && accessToken !== "") {
+    if (
+      accessToken !== null &&
+      accessToken !== undefined &&
+      accessToken !== "" &&
+      accessToken !== "undefined"
+    ) {
       setIsLoggedIn(true);
     }
-  }, );
+  });
 
   // Function to handle logout
   const handleLogout = () => {
     // Clear access token from local storage or wherever it is stored
     localStorage.removeItem("access_token");
+    localStorage.removeItem("user_type");
+
     // Set isLoggedIn to false
     setIsLoggedIn(false);
+    console.log("Logged out");
+    window.location.reload();
   };
 
   // Function to handle login
@@ -59,7 +68,7 @@ function Component() {
         <NavbarToggle />
       </div>
       <NavbarCollapse>
-        <NavbarLink href="#" active>
+        <NavbarLink href="/" active>
           Home
         </NavbarLink>
         <NavbarLink href="#">About</NavbarLink>
