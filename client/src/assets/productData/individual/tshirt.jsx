@@ -1,11 +1,13 @@
 const tshirtData = {
   isPreset:true,
+  manufacturer_name: "Hello World",
   id: 1,
   product_type: "tshirt",
   product_name: "T-shirt1",
   thumbnail: "/productThumbnails/tshirt.png",
   num_of_parts: 4,
   num_of_views: 1,
+
   colors: [
     {
       id: "front_main_color",

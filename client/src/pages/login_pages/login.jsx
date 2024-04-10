@@ -32,12 +32,16 @@ loginFields.forEach((field) => (fieldState[field.id] = ""));
 function Login() {
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState(fieldState);
+
   const [token, setToken] = useState(
     localStorage.getItem("access_token") || ""
   );
+  const [selectedOption, setSelectedOption] = useState("customer");
+
   useEffect(() => {
-    if (token) {
-      navigate("/");
+    if (token && !(token === "undefined")) {
+        navigate("/");
+      
     }
   }, [token]);
 
@@ -51,16 +55,24 @@ function Login() {
         body: JSON.stringify({
           email: loginState["email-address"],
           password: loginState["password"],
+          user_type: selectedOption,
         }),
       });
+
       const res = await response.json();
       console.log(res.access_token);
       localStorage.setItem("access_token", res.access_token);
+      localStorage.setItem("user_type", res.user_type);
+
       setToken(res.access_token);
     } catch (e) {
       console.log(e);
     }
   }
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   const handleLoginChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
@@ -73,6 +85,25 @@ function Login() {
         fields={loginFields}
         handleChange={handleLoginChange}
       ></FormFields>
+      <label>
+        <input
+          type="radio"
+          value="customer"
+          checked={selectedOption === "customer"}
+          onChange={handleOptionChange}
+        />
+        Login as a customer
+      </label>
+      <br></br>
+      <label>
+        <input
+          type="radio"
+          value="manufacturer"
+          checked={selectedOption === "manufacturer"}
+          onChange={handleOptionChange}
+        />
+        Login as a Manufacturer
+      </label>
       <FormSubmissionArea
         formType="Login"
         handleSubmit={handleLoginSubmit}

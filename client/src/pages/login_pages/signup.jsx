@@ -3,6 +3,7 @@ import FormFields from "../../components/loginComponents/formFields";
 import FormHeader from "../../components/loginComponents/formHeader";
 import FormSubmissionArea from "../../components/loginComponents/formSubmissionArea";
 import { useNavigate } from "react-router-dom";
+import { Button } from "flowbite-react";
 
 const signupFields = [
   {
@@ -52,16 +53,22 @@ signupFields.forEach((field) => (fieldState[field.id] = ""));
 
 function SignUp() {
   const [signupState, setSignupState] = useState(fieldState);
+  const [selectedOption, setSelectedOption] = useState("customer");
+
   const navigate = useNavigate();
   const [token, setToken] = useState(
     localStorage.getItem("access_token") || ""
   );
 
   useEffect(() => {
-    if (token ) {
+    if (token && !(token === "undefined")) {
       navigate("/");
     }
   }, [token]);
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   async function handleSignUpSubmit() {
     try {
@@ -71,14 +78,16 @@ function SignUp() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: signupState['name'],
+          name: signupState["name"],
           email: signupState["email-address"],
           password: signupState["password"],
+          user_type: selectedOption,
         }),
       });
       const res = await response.json();
       console.log(res.access_token);
       localStorage.setItem("access_token", res.access_token);
+      localStorage.setItem("user_type", res.user_type);
       setToken(res.access_token);
     } catch (e) {
       console.log(e);
@@ -96,6 +105,25 @@ function SignUp() {
         fields={signupFields}
         handleChange={handleSignUpChange}
       ></FormFields>
+      <label>
+        <input
+          type="radio"
+          value="customer"
+          checked={selectedOption === "customer"}
+          onChange={handleOptionChange}
+        />
+        Sign up as a customer
+      </label>
+      <br></br>
+      <label>
+        <input
+          type="radio"
+          value="manufacturer"
+          checked={selectedOption === "manufacturer"}
+          onChange={handleOptionChange}
+        />
+        Sign up as a Manufacturer
+      </label>
       <FormSubmissionArea
         formType="SignUp"
         handleSubmit={handleSignUpSubmit}

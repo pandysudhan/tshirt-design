@@ -160,6 +160,20 @@ export default function ProductCard({ data }) {
         >
           {data.product_name}
         </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: -30,
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            background: "rgba(255, 255, 255, 0.7)",
+            padding: "5px",
+            fontWeight: "bold",
+          }}
+        >
+          {"By: " + data.manufacturer_name}
+        </div>
         <div style={{ position: "absolute", top: "5px", right: "5px" }}></div>
       </div>
     </div>
