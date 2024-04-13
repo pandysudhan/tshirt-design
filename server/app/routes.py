@@ -142,14 +142,9 @@ def my_designs():
         print("Current user:", current_user)
 
         # Fetch designs associated with the current user
-        user_designs = db.custom_designs.find({"user_email": current_user})
-
-        # Convert MongoDB cursor to list of dictionaries
-        designs_list = []
-        for design in user_designs:
-            # Convert ObjectId to string for serialization
-            design.pop("_id", None)
-            designs_list.append(design)
+        designs_list = list(
+            db.custom_designs.find({"user_email": current_user}, {"_id": 0})
+        )
 
         print("User designs:", designs_list)
 
@@ -167,16 +162,10 @@ def manufacturer_desings():
         print("Current user:", current_user)
 
         # Fetch designs associated with the current user
-        user_designs = db.manufacturer_designs.find(
-            {"manufacturer_email": current_user}
-        )
-
-        # Convert MongoDB cursor to list of dictionaries
-        designs_list = []
-        for design in user_designs:
-            # Convert ObjectId to string for serialization
-            design.pop("_id", None)
-            designs_list.append(design)
+        designs_list = list(db.manufacturer_designs.find(
+            {"manufacturer_email": current_user},
+            {"_id":0}
+        ))
 
         print("User designs:", designs_list)
 
@@ -336,7 +325,9 @@ def download_order(order_id):
 
         # Create a JSON file with the order data
         filename = f"order_{order_id}.json"
-        filepath = f"/tmp/{filename}"  # You can adjust the file path as per your requirement
+        filepath = (
+            f"/tmp/{filename}"  # You can adjust the file path as per your requirement
+        )
 
         with open(filepath, "w") as file:
             json.dump(order, file)
